@@ -1,0 +1,10 @@
+1 epoch _ acc : 0.6980, loss : 0.6071
+2 epoch _ acc : 0.7429, loss : 0.5550
+3 epoch _ acc : 0.7905, loss : 0.4284
+4 epoch _ acc : 0.8982, loss : 0.2557
+5 epoch _ acc : 0.9183, loss : 0.1981
+6 epoch _ acc : 0.9312, loss : 0.1697
+7 epoch _ acc : 0.9463, loss : 0.1414
+8 epoch _ acc : 0.9549, loss : 0.1252
+9 epoch _ acc : 0.9576, loss : 0.1112
+10 epoch _ acc : 0.9607, loss : 0.1052

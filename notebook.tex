@@ -1,0 +1,1021 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{peneumonia\_detection-Copy1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{uxd749uxbd80-x-ray-uxc0acuxc9c4uxc744-uxc778uxacbduxc2e0uxacf5uxb9dd-uxd559uxc2b5uxc744-uxc774uxc6a9uxd558uxc5ec-uxd3d0uxb834-uxd658uxc790-uxad6cuxbd84-uxd558uxae30}{%
+\subsection{흉부 x-ray 사진을 인경신공망 학습을 이용하여 폐렴 환자 구분
+하기}\label{uxd749uxbd80-x-ray-uxc0acuxc9c4uxc744-uxc778uxacbduxc2e0uxacf5uxb9dd-uxd559uxc2b5uxc744-uxc774uxc6a9uxd558uxc5ec-uxd3d0uxb834-uxd658uxc790-uxad6cuxbd84-uxd558uxae30}}
+
+    \hypertarget{uxae30uxbcf8-uxb77cuxc774uxbe0cuxb7ecuxb9ac-uxc784uxd3ecuxd2b8}{%
+\subsubsection{기본 라이브러리
+임포트}\label{uxae30uxbcf8-uxb77cuxc774uxbe0cuxb7ecuxb9ac-uxc784uxd3ecuxd2b8}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} 기본적으로 필요한 라이브러리 import \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{cv2}
+        \PY{k+kn}{import} \PY{n+nn}{skimage}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{glob} \PY{k}{import} \PY{n}{glob}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} 머신러닝 관련 라이브러리 import \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{k+kn}{import} \PY{n+nn}{sklearn}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{transform} \PY{k}{import} \PY{n}{resize}
+        \PY{k+kn}{import} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{as} \PY{n+nn}{km}
+        \PY{k+kn}{import} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{as} \PY{n+nn}{kl}
+        
+        \PY{c+c1}{\PYZsh{} Encode labels to hot vectors (ex : 2 \PYZhy{}\PYZgt{} [0,0,1,0,0,0,0,0,0,0])}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{np\PYZus{}utils} \PY{k}{import} \PY{n}{to\PYZus{}categorical}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/h5py/\_\_init\_\_.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from .\_conv import register\_converters as \_register\_converters
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \hypertarget{uxb370uxc774uxd130-uxacbduxb85c-uxc124uxc815}{%
+\subsubsection{데이터 경로
+설정}\label{uxb370uxc774uxd130-uxacbduxb85c-uxc124uxc815}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{train\PYZus{}dir} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../chest\PYZus{}xray/train/}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{test\PYZus{}dir} \PY{o}{=}  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../chest\PYZus{}xray/test/}\PY{l+s+s2}{\PYZdq{}} 
+\end{Verbatim}
+
+
+    \hypertarget{uxb370uxc774uxd130-uxd06cuxae30-uxc124uxc815}{%
+\subsubsection{데이터 크기
+설정}\label{uxb370uxc774uxd130-uxd06cuxae30-uxc124uxc815}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} 데이터 크기 (150 x 150)}
+        \PY{n}{\PYZus{}N\PYZus{}ROW} \PY{o}{=} \PY{l+m+mi}{150}  \PY{c+c1}{\PYZsh{} 세로 150}
+        \PY{n}{\PYZus{}N\PYZus{}COL} \PY{o}{=} \PY{l+m+mi}{150}  \PY{c+c1}{\PYZsh{} 가로 150}
+        \PY{n}{\PYZus{}N\PYZus{}PIXEL} \PY{o}{=} \PY{n}{\PYZus{}N\PYZus{}ROW} \PY{o}{*} \PY{n}{\PYZus{}N\PYZus{}COL}
+\end{Verbatim}
+
+
+    \hypertarget{uxd3f4uxb354uxc5d0-uxc788uxb294-uxb370uxc774uxd130uxb97c-uxc77duxc5b4uxc11c-uxcd94uxac00-uxbc0f-uxb77cuxbca8uxb9c1uxc744-uxd558uxb294-uxd568uxc218-get_data-uxc124uxc815}{%
+\subsubsection{폴더에 있는 데이터를 읽어서, 추가 및 라벨링을 하는 함수
+get\_data
+설정}\label{uxd3f4uxb354uxc5d0-uxc788uxb294-uxb370uxc774uxd130uxb97c-uxc77duxc5b4uxc11c-uxcd94uxac00-uxbc0f-uxb77cuxbca8uxb9c1uxc744-uxd558uxb294-uxd568uxc218-get_data-uxc124uxc815}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}data}\PY{p}{(}\PY{n}{folder}\PY{p}{)}\PY{p}{:}
+            \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{folderName} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{folder}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{foldername = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{folderName} \PY{p}{)}
+                
+                \PY{k}{if} \PY{n}{folderName}\PY{o}{.}\PY{n}{startswith}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{continue}
+                
+                \PY{k}{if} \PY{n}{folderName} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NORMAL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{n}{label} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{elif} \PY{n}{folderName} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PNEUMONIA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{n}{label} \PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Err! I don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t know this data...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                    \PY{k}{return}
+        
+                \PY{c+c1}{\PYZsh{} out of memory 때문에 커널이 자꾸 죽기 때문에, 이미지 개수를 제한한다. }
+                \PY{n}{count\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{for} \PY{n}{image\PYZus{}filename} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{folder} \PY{o}{+} \PY{n}{folderName}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{count\PYZus{}num} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1} 
+        \PY{c+c1}{\PYZsh{}             if count\PYZus{}num \PYZgt{} 100 : }
+        \PY{c+c1}{\PYZsh{}                 break }
+                    \PY{n}{img\PYZus{}file} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{folder} \PY{o}{+} \PY{n}{folderName} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{image\PYZus{}filename}\PY{p}{)}
+                    
+                    \PY{k}{if} \PY{n}{img\PYZus{}file} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:} 
+                        \PY{n}{img\PYZus{}file} \PY{o}{=} \PY{n}{skimage}\PY{o}{.}\PY{n}{transform}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{img\PYZus{}file}\PY{p}{,} \PY{p}{(}\PY{n}{\PYZus{}N\PYZus{}ROW}\PY{p}{,} \PY{n}{\PYZus{}N\PYZus{}COL}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+                        \PY{n}{img\PYZus{}arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{img\PYZus{}file}\PY{p}{)}
+                        \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img\PYZus{}arr}\PY{p}{)}
+                        \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{label}\PY{p}{)}
+                            
+            \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+            \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{X}\PY{p}{,}\PY{n}{y}
+\end{Verbatim}
+
+
+    \hypertarget{uxd559uxc2b5-uxb370uxc774uxd130uxb97c-uxc77duxc5b4uxc624uxace0-uxb77cuxbca8uxb3c4-uxc77duxc5b4uxc628uxb2e4.}{%
+\subsubsection{학습 데이터를 읽어오고 라벨도
+읽어온다.}\label{uxd559uxc2b5-uxb370uxc774uxd130uxb97c-uxc77duxc5b4uxc624uxace0-uxb77cuxbca8uxb3c4-uxc77duxc5b4uxc628uxb2e4.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{train\PYZus{}dir}\PY{p}{)}
+        \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{o}{=} \PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{test\PYZus{}dir}\PY{p}{)}
+        
+        \PY{n}{y\PYZus{}trainHot} \PY{o}{=} \PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{num\PYZus{}classes} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{y\PYZus{}testHot} \PY{o}{=} \PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{num\PYZus{}classes} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  0\%|          | 0/3876 [00:00<?, ?it/s]/usr/local/lib/python3.6/site-packages/skimage/transform/\_warps.py:105: UserWarning: The default mode, 'constant', will be changed to 'reflect' in skimage 0.15.
+  warn("The default mode, 'constant', will be changed to 'reflect' in "
+/usr/local/lib/python3.6/site-packages/skimage/transform/\_warps.py:110: UserWarning: Anti-aliasing will be enabled by default in skimage 0.15 to avoid aliasing artifacts when down-sampling images.
+  warn("Anti-aliasing will be enabled by default in skimage 0.15 to "
+  0\%|          | 3/3876 [00:00<02:15, 28.69it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+foldername = .DS\_Store
+foldername = PNEUMONIA
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 3876/3876 [02:38<00:00, 24.46it/s]
+  0\%|          | 0/1342 [00:00<?, ?it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+foldername = NORMAL
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 1342/1342 [02:06<00:00, 10.65it/s]
+  1\%|          | 4/390 [00:00<00:10, 35.68it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+foldername = .DS\_Store
+foldername = PNEUMONIA
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 390/390 [00:12<00:00, 31.23it/s]
+  0\%|          | 1/234 [00:00<00:30,  7.58it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+foldername = NORMAL
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 234/234 [00:20<00:00, 11.41it/s]
+
+    \end{Verbatim}
+
+    \hypertarget{uxc774uxbbf8uxc9c0uxb97c-uxbcf4uxc5ecuxc8fcuxb294-uxd568uxc218-uxc815uxc758}{%
+\subsubsection{이미지를 보여주는 함수
+정의}\label{uxc774uxbbf8uxc9c0uxb97c-uxbcf4uxc5ecuxc8fcuxb294-uxd568uxc218-uxc815uxc758}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{show\PYZus{}img}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Plot histogram of RGB Pixel Intensities}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{c+c1}{\PYZsh{}     plt.figure(figsize=(10,5))}
+        \PY{c+c1}{\PYZsh{}     plt.subplot(1,2,1)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{uxbe44uxc815uxc0c1uxc758-uxd3d0}{%
+\subsubsection{비정상의 폐}\label{uxbe44uxc815uxc0c1uxc758-uxd3d0}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{show\PYZus{}img}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{show\PYZus{}img}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{uxc815uxc0c1uxc778uxc758-uxd3d0}{%
+\subsubsection{정상인의 폐}\label{uxc815uxc0c1uxc778uxc758-uxd3d0}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{show\PYZus{}img}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{1040}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{1040}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{show\PYZus{}img}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{623}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{623}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{uxd658uxc790uxc758-uxd3d0}{%
+\subsubsection{환자의 폐}\label{uxd658uxc790uxc758-uxd3d0}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{비정상!!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{multipleImages} \PY{o}{=} \PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../notebook/chest\PYZus{}xray/train/PNEUMONIA/**}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{i\PYZus{}} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{,} \PY{l+m+mf}{10.0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} plt.subplots\PYZus{}adjust(wspace=0, hspace=0)}
+         \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n}{multipleImages}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{:}
+             \PY{n}{im} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+             \PY{n}{im} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{p}{(}\PY{n}{\PYZus{}N\PYZus{}ROW} \PY{p}{,} \PY{n}{\PYZus{}N\PYZus{}COL}\PY{p}{)}\PY{p}{)} 
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{i\PYZus{}}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}.set\PYZus{}title(l)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{)}\PY{p}{;} 
+         \PY{c+c1}{\PYZsh{}     plt.imshow(cv2.cvtColor(im, cv2.COLOR\PYZus{}BGR2RGB)); }
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{i\PYZus{}} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+비정상!!
+
+    \end{Verbatim}
+
+    \hypertarget{uxc815uxc0c1uxc778uxc758-uxd3d0}{%
+\subsubsection{정상인의 폐}\label{uxc815uxc0c1uxc778uxc758-uxd3d0}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{정상!!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{multipleImages} \PY{o}{=} \PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../notebook/chest\PYZus{}xray/train/NORMAL/**}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{i\PYZus{}} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{,} \PY{l+m+mf}{10.0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} plt.subplots\PYZus{}adjust(wspace=0, hspace=0)}
+         \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n}{multipleImages}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{:}
+             \PY{n}{im} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+             \PY{n}{im} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{n}{im}\PY{p}{,} \PY{p}{(}\PY{n}{\PYZus{}N\PYZus{}ROW}\PY{p}{,} \PY{n}{\PYZus{}N\PYZus{}COL}\PY{p}{)}\PY{p}{)} 
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{i\PYZus{}}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}.set\PYZus{}title(l)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{im}\PY{p}{)}\PY{p}{;} 
+         \PY{c+c1}{\PYZsh{}     plt.imshow(cv2.cvtColor(im, cv2.COLOR\PYZus{}BGR2RGB)); }
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{i\PYZus{}} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+정상!!
+
+    \end{Verbatim}
+
+    \hypertarget{uxc5d0uxb7ec-uxd655uxc778-uxd568uxc218-uxc0dduxc131}{%
+\subsubsection{에러 확인 함수
+생성}\label{uxc5d0uxb7ec-uxd655uxc778-uxd568uxc218-uxc0dduxc131}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{confirmErr}\PY{p}{(}\PY{n}{realAnswerList}\PY{p}{,} \PY{n}{testAnswerList}\PY{p}{)}\PY{p}{:}
+             \PY{n}{answerNum} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{eachAns} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{realAnswerList}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{testAnswerList}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{n}{eachAns}\PY{p}{:}
+                     \PY{n}{answerNum} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{realAnswerList}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{answerNum}\PY{p}{)}\PY{o}{/}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{realAnswerList}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}
+\end{Verbatim}
+
+
+    \hypertarget{uxd559uxc2b5-uxbaa8uxb378uxc744-uxc124uxc815uxd55cuxb2e4.}{%
+\subsubsection{학습 모델을
+설정한다.}\label{uxd559uxc2b5-uxbaa8uxb378uxc744-uxc124uxc815uxd55cuxb2e4.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{study}\PY{p}{(}\PY{n}{trDataList}\PY{p}{,} \PY{n}{trLabelList}\PY{p}{,} \PY{n}{save\PYZus{}h5\PYZus{}name}\PY{p}{,} \PY{n}{log\PYZus{}txt\PYZus{}name}\PY{p}{)}\PY{p}{:}
+             \PY{n}{trDataList} \PY{o}{=} \PY{n}{X\PYZus{}train}
+             \PY{n}{trLabelList} \PY{o}{=} \PY{n}{y\PYZus{}trainHot}
+         
+             \PY{c+c1}{\PYZsh{} 모델 설정}
+             \PY{n}{model} \PY{o}{=} \PY{n}{km}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{n}{\PYZus{}N\PYZus{}ROW}\PY{p}{,} \PY{n}{\PYZus{}N\PYZus{}COL}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}
+                                 \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{1}  \PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}
+                                 \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{1}  \PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}
+                                 \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{l+m+mi}{1}  \PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{Flatten}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{kl}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} 모델 출력 }
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 학습 데이터를 추출하여 저장하고 출력한다}
+             \PY{n}{history\PYZus{}callback} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{trDataList}\PY{p}{,} \PY{n}{trLabelList}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{loss\PYZus{}history} \PY{o}{=} \PY{n}{history\PYZus{}callback}\PY{o}{.}\PY{n}{history}
+             \PY{n}{train\PYZus{}log} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{loss\PYZus{}history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{train\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ epoch \PYZus{} acc : }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{, loss : }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{loss\PYZus{}history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{loss\PYZus{}history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 로그 기록 }
+             \PY{n}{fd} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{log\PYZus{}txt\PYZus{}name}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{fd}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{train\PYZus{}log}\PY{p}{)}
+             \PY{n}{fd}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 모델 저장 }
+             \PY{n}{km}\PY{o}{.}\PY{n}{save\PYZus{}model}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{save\PYZus{}h5\PYZus{}name}\PY{p}{)} 
+         
+             \PY{c+c1}{\PYZsh{} 실제 에러율 확인 }
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{err is  }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{confirmErr}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{trLabelList}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} 
+                                                 \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{trDataList}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{model}
+\end{Verbatim}
+
+
+    \hypertarget{uxd559uxc2b5-uxc218uxd589}{%
+\subsubsection{학습 수행}\label{uxd559uxc2b5-uxc218uxd589}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{\PYZus{}model} \PY{o}{=} \PY{n}{study}\PY{p}{(}\PY{n}{trDataList} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{trLabelList} \PY{o}{=} \PY{n}{y\PYZus{}testHot}\PY{p}{,} \PY{n}{save\PYZus{}h5\PYZus{}name}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model\PYZus{}plus\PYZus{}layer.h5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{log\PYZus{}txt\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}log\PYZus{}plus\PYZus{}layer.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+conv2d\_4 (Conv2D)            (None, 146, 146, 10)      760       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_3 (MaxPooling2 (None, 73, 73, 10)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+activation\_4 (Activation)    (None, 73, 73, 10)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_5 (Conv2D)            (None, 69, 69, 10)        2510      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_4 (MaxPooling2 (None, 34, 34, 10)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+activation\_5 (Activation)    (None, 34, 34, 10)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_6 (Conv2D)            (None, 30, 30, 10)        2510      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+activation\_6 (Activation)    (None, 30, 30, 10)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+flatten\_2 (Flatten)          (None, 9000)              0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_2 (Dense)              (None, 2)                 18002     
+=================================================================
+Total params: 23,782
+Trainable params: 23,782
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+None
+
+
+
+
+Epoch 1/10
+ - 186s - loss: 0.5928 - acc: 0.7431
+Epoch 2/10
+ - 146s - loss: 0.4944 - acc: 0.7690
+Epoch 3/10
+ - 166s - loss: 0.3635 - acc: 0.8422
+Epoch 4/10
+ - 162s - loss: 0.2398 - acc: 0.9024
+Epoch 5/10
+ - 161s - loss: 0.2005 - acc: 0.9225
+Epoch 6/10
+ - 152s - loss: 0.1484 - acc: 0.9413
+Epoch 7/10
+ - 161s - loss: 0.1325 - acc: 0.9513
+Epoch 8/10
+ - 156s - loss: 0.1225 - acc: 0.9530
+Epoch 9/10
+ - 128s - loss: 0.1156 - acc: 0.9553
+Epoch 10/10
+ - 134s - loss: 0.1179 - acc: 0.9551
+err is  3.834356\%
+
+    \end{Verbatim}
+
+    \hypertarget{uxd559uxc2b5-uxacb0uxacfcuxb97c-test-set-uxc73cuxb85c-uxd655uxc778}{%
+\subsubsection{학습 결과를 test set 으로
+확인}\label{uxd559uxc2b5-uxacb0uxacfcuxb97c-test-set-uxc73cuxb85c-uxd655uxc778}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{trDataList} \PY{o}{=} \PY{n}{X\PYZus{}test}
+         \PY{n}{trLabelList} \PY{o}{=} \PY{n}{y\PYZus{}testHot}
+         
+         \PY{c+c1}{\PYZsh{} 실제 에러율 확인}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The real err is  }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{confirmErr}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{trLabelList}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{trDataList}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The real err is  26.121795\%
+
+    \end{Verbatim}
+
+    \hypertarget{uxbaa8uxb378-uxd30cuxb77cuxbbf8uxd130uxb97c-uxac00uxc838uxc640uxc11c-test-uxb370uxc774uxd130-uxc14buxacfc-uxbe44uxad50uxd569uxb2c8uxb2e4}{%
+\subsubsection{모델 파라미터를 가져와서 test 데이터 셋과
+비교합니다}\label{uxbaa8uxb378-uxd30cuxb77cuxbbf8uxd130uxb97c-uxac00uxc838uxc640uxc11c-test-uxb370uxc774uxd130-uxc14buxacfc-uxbe44uxad50uxd569uxb2c8uxb2e4}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k}{def} \PY{n+nf}{confirm\PYZus{}study}\PY{p}{(}\PY{n}{trDataList}\PY{p}{,} \PY{n}{trLabelList}\PY{p}{)}\PY{p}{:}
+             \PY{n}{test\PYZus{}log} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}} 
+             \PY{c+c1}{\PYZsh{} 모델 파라미터 로드}
+             \PY{n}{newModel} \PY{o}{=} \PY{n}{km}\PY{o}{.}\PY{n}{load\PYZus{}model}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model.h5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 테스트}
+             \PY{n}{res} \PY{o}{=} \PY{n}{newModel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{trDataList}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{res}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{res}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{n}{res}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{res}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{test\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{res}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{test\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n}{test\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{test\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{res}\PY{p}{)}
+             \PY{n}{test\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{test\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{res}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{test\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+         
+             \PY{c+c1}{\PYZsh{} 전체 에러 출력}
+             \PY{n}{err} \PY{o}{=} \PY{n}{confirmErr}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{trLabelList}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{res}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test set err is  }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(} \PY{n}{err} \PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{test\PYZus{}log} \PY{o}{+}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Test set err is  }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{err}\PY{p}{)}
+         
+             \PY{n}{fd} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}log.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{fd}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{test\PYZus{}log}\PY{p}{)}
+             \PY{n}{fd}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{trDataList} \PY{o}{=} \PY{n}{X\PYZus{}test}
+         \PY{n}{trLabelList} \PY{o}{=} \PY{n}{y\PYZus{}testHot}
+         
+         \PY{n}{confirm\PYZus{}study}\PY{p}{(}\PY{n}{trDataList}\PY{p}{,} \PY{n}{trLabelList}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+res (200, 2)
+[[ 0.40065441  0.59934562]
+ [ 0.37865168  0.62134826]
+ [ 0.36652836  0.63347155]
+ [ 0.36283416  0.63716584]
+ [ 0.42699265  0.57300735]
+ [ 0.3695049   0.63049513]
+ [ 0.42766535  0.57233465]
+ [ 0.47247884  0.52752113]
+ [ 0.38120604  0.61879396]
+ [ 0.41807187  0.58192819]
+ [ 0.46102351  0.53897655]
+ [ 0.36381125  0.63618875]
+ [ 0.45230317  0.54769683]
+ [ 0.46187937  0.53812063]
+ [ 0.39432648  0.60567349]
+ [ 0.45906234  0.54093766]
+ [ 0.38675377  0.61324626]
+ [ 0.37412065  0.62587935]
+ [ 0.4713167   0.5286833 ]
+ [ 0.45820084  0.54179913]
+ [ 0.3997471   0.60025287]
+ [ 0.3724795   0.6275205 ]
+ [ 0.43017918  0.56982088]
+ [ 0.32728738  0.67271262]
+ [ 0.34465358  0.65534651]
+ [ 0.49502534  0.50497466]
+ [ 0.34094384  0.65905619]
+ [ 0.43317881  0.56682122]
+ [ 0.32482624  0.67517376]
+ [ 0.43247452  0.56752545]
+ [ 0.35689729  0.64310265]
+ [ 0.4450053   0.55499476]
+ [ 0.36723065  0.63276935]
+ [ 0.363673    0.63632703]
+ [ 0.37385285  0.62614721]
+ [ 0.5258581   0.47414193]
+ [ 0.36869606  0.63130397]
+ [ 0.38252816  0.61747181]
+ [ 0.41813207  0.58186799]
+ [ 0.44889778  0.55110222]
+ [ 0.33930066  0.66069937]
+ [ 0.32844132  0.67155868]
+ [ 0.46815363  0.5318464 ]
+ [ 0.40223387  0.59776616]
+ [ 0.40816984  0.59183019]
+ [ 0.36541387  0.63458616]
+ [ 0.35342187  0.64657813]
+ [ 0.53854674  0.4614532 ]
+ [ 0.38686636  0.61313367]
+ [ 0.44956937  0.55043066]
+ [ 0.37908238  0.62091768]
+ [ 0.45564002  0.54435998]
+ [ 0.36733112  0.63266891]
+ [ 0.38099951  0.61900049]
+ [ 0.38614148  0.61385846]
+ [ 0.39661446  0.60338551]
+ [ 0.37220481  0.62779516]
+ [ 0.39929017  0.60070986]
+ [ 0.38888383  0.61111617]
+ [ 0.525015    0.47498494]
+ [ 0.40435603  0.59564388]
+ [ 0.49140614  0.5085938 ]
+ [ 0.35740316  0.6425969 ]
+ [ 0.38373777  0.6162622 ]
+ [ 0.39932737  0.6006726 ]
+ [ 0.44189557  0.5581044 ]
+ [ 0.39409307  0.6059069 ]
+ [ 0.60262972  0.39737025]
+ [ 0.42930076  0.57069927]
+ [ 0.38602489  0.61397511]
+ [ 0.34650308  0.65349692]
+ [ 0.47970191  0.52029812]
+ [ 0.33078054  0.66921949]
+ [ 0.42606613  0.57393384]
+ [ 0.45313787  0.54686213]
+ [ 0.4637464   0.53625357]
+ [ 0.44454718  0.55545282]
+ [ 0.44163606  0.55836391]
+ [ 0.4597944   0.54020566]
+ [ 0.34574473  0.65425521]
+ [ 0.51370126  0.48629877]
+ [ 0.47675046  0.52324957]
+ [ 0.40922531  0.59077477]
+ [ 0.4329645   0.56703556]
+ [ 0.43521911  0.56478089]
+ [ 0.39563042  0.60436958]
+ [ 0.49737933  0.50262064]
+ [ 0.39419717  0.60580289]
+ [ 0.40016279  0.59983718]
+ [ 0.44584113  0.55415887]
+ [ 0.3304483   0.66955167]
+ [ 0.39392406  0.60607594]
+ [ 0.44757622  0.55242378]
+ [ 0.4898003   0.51019973]
+ [ 0.38013431  0.61986566]
+ [ 0.51768821  0.48231179]
+ [ 0.42777082  0.57222921]
+ [ 0.35726383  0.64273614]
+ [ 0.41930616  0.58069384]
+ [ 0.42890787  0.57109213]
+ [ 0.50727886  0.49272117]
+ [ 0.5205822   0.47941786]
+ [ 0.48592365  0.51407641]
+ [ 0.51360977  0.48639023]
+ [ 0.40570387  0.5942961 ]
+ [ 0.50374985  0.49625012]
+ [ 0.4606503   0.53934973]
+ [ 0.53817505  0.46182498]
+ [ 0.46734864  0.53265136]
+ [ 0.4634988   0.53650117]
+ [ 0.45144477  0.5485552 ]
+ [ 0.62955737  0.37044257]
+ [ 0.57463408  0.42536598]
+ [ 0.57220066  0.42779934]
+ [ 0.5216471   0.4783529 ]
+ [ 0.4626103   0.5373897 ]
+ [ 0.51911211  0.48088783]
+ [ 0.46377456  0.53622544]
+ [ 0.58673346  0.41326654]
+ [ 0.53863817  0.46136186]
+ [ 0.47249526  0.52750474]
+ [ 0.57467157  0.42532852]
+ [ 0.46067128  0.53932863]
+ [ 0.50807691  0.49192309]
+ [ 0.45691332  0.54308677]
+ [ 0.48825914  0.51174086]
+ [ 0.48895949  0.51104051]
+ [ 0.47983512  0.52016491]
+ [ 0.57280946  0.42719048]
+ [ 0.43861714  0.56138295]
+ [ 0.46670055  0.53329951]
+ [ 0.47850049  0.52149951]
+ [ 0.39195436  0.60804564]
+ [ 0.43237767  0.56762236]
+ [ 0.52020448  0.47979558]
+ [ 0.54133475  0.45866519]
+ [ 0.38987589  0.61012411]
+ [ 0.52885073  0.4711493 ]
+ [ 0.53350174  0.46649826]
+ [ 0.496364    0.50363594]
+ [ 0.47501501  0.52498507]
+ [ 0.49993655  0.50006348]
+ [ 0.60554296  0.39445701]
+ [ 0.44763389  0.55236614]
+ [ 0.58035046  0.41964951]
+ [ 0.52831012  0.47168991]
+ [ 0.445916    0.554084  ]
+ [ 0.53285027  0.46714976]
+ [ 0.43478683  0.5652132 ]
+ [ 0.56844723  0.43155274]
+ [ 0.53488469  0.46511528]
+ [ 0.53377324  0.46622676]
+ [ 0.56574291  0.43425715]
+ [ 0.44137248  0.55862749]
+ [ 0.57125193  0.42874804]
+ [ 0.51142389  0.48857608]
+ [ 0.48924088  0.51075912]
+ [ 0.51102501  0.48897508]
+ [ 0.55382049  0.44617957]
+ [ 0.55876976  0.44123027]
+ [ 0.51243216  0.48756787]
+ [ 0.461822    0.53817797]
+ [ 0.56060743  0.43939254]
+ [ 0.50586557  0.4941344 ]
+ [ 0.51718289  0.48281711]
+ [ 0.47565964  0.52434039]
+ [ 0.53413218  0.46586788]
+ [ 0.53440279  0.46559724]
+ [ 0.57501638  0.42498359]
+ [ 0.46927908  0.53072095]
+ [ 0.50124079  0.49875924]
+ [ 0.49253011  0.50746989]
+ [ 0.43229082  0.56770927]
+ [ 0.54882419  0.45117578]
+ [ 0.43287385  0.56712615]
+ [ 0.43599942  0.56400061]
+ [ 0.42373163  0.57626843]
+ [ 0.44540471  0.55459529]
+ [ 0.50024956  0.49975041]
+ [ 0.56346524  0.43653476]
+ [ 0.55995142  0.44004849]
+ [ 0.46068996  0.53931004]
+ [ 0.46425197  0.535748  ]
+ [ 0.49574137  0.50425863]
+ [ 0.49227566  0.50772434]
+ [ 0.48337722  0.51662278]
+ [ 0.50089759  0.49910241]
+ [ 0.52836823  0.4716318 ]
+ [ 0.43707585  0.56292415]
+ [ 0.56659031  0.43340969]
+ [ 0.52850646  0.47149348]
+ [ 0.47532952  0.52467048]
+ [ 0.60259068  0.39740935]
+ [ 0.45520294  0.544797  ]
+ [ 0.5731799   0.42682013]
+ [ 0.45843247  0.54156762]
+ [ 0.54933131  0.45066863]
+ [ 0.59079629  0.40920368]
+ [ 0.54534197  0.454658  ]
+ [ 0.50129998  0.49870011]]
+[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1
+ 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1
+ 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 0 0 1 0 1 0 1 0 1 1 1
+ 0 0 0 0 1 0 1 0 0 1 0 1 0 1 1 1 1 0 1 1 1 1 1 0 0 1 0 0 1 1 1 0 1 0 0 1 0
+ 1 0 0 0 0 1 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0 1 0 1 1 0 1 1 1 1 0 0 0 1 1 1 1
+ 1 0 0 1 0 0 1 0 1 0 1 0 0 0 0]
+
+Test set err is  26.000000\%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} (150, 150, 1)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} (1998, 150, 150, 1)
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
